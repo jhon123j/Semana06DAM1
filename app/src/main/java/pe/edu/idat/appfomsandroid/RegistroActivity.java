@@ -43,6 +43,7 @@ public class RegistroActivity extends AppCompatActivity
         binding.cbotros.setOnClickListener(this);
         binding.btnregistrar.setOnClickListener(this);
         binding.spestadocivil.setOnItemSelectedListener(this);
+        binding.btnlistapersonas.setOnClickListener(this);
 
     }
 
