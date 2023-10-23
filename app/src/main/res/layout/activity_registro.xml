@@ -154,4 +154,16 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/swnotificacion" />
+
+    <Button
+        android:id="@+id/btnlistapersonas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/valbtnirlistado"
+        app:icon="@drawable/baseline_format_list_bulleted_24"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/btnregistrar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

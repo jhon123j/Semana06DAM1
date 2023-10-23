@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,7 @@ public class RegistroActivity extends AppCompatActivity
         binding.cbarte.setOnClickListener(this);
         binding.cbotros.setOnClickListener(this);
         binding.btnregistrar.setOnClickListener(this);
+        binding.spestadocivil.setOnItemSelectedListener(this);
 
     }
 
@@ -115,8 +119,9 @@ public class RegistroActivity extends AppCompatActivity
         }else
             respuesta = true;
         if(!respuesta)
-            Toast.makeText(this, mensaje,
-                    Toast.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), mensaje,
+                    Toast.LENGTH_LONG).show();
+
         return respuesta;
     }
 
@@ -130,12 +135,13 @@ public class RegistroActivity extends AppCompatActivity
             infoPersona.append(estadocivil+"-");
             infoPersona.append(binding.swnotificacion.isChecked());
             personas.add(infoPersona.toString());
-            Toast.makeText(this, "Persona Registrada",
-                    Toast.LENGTH_SHORT).show();
+            /*Toast.makeText(this, "Persona Registrada",
+                    Toast.LENGTH_SHORT).show();*/
+            Snackbar.make(binding.getRoot(), "Persona registrada",
+                    Toast.LENGTH_LONG).show();
 
         }
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -159,11 +165,28 @@ public class RegistroActivity extends AppCompatActivity
         }else if(v.getId() == R.id.cbotros){
             agregarQuitarPreferencia(v, "Otras preferencias");
         }else if(v.getId() == R.id.btnregistrar){
+            registrarPersona();
+            setearControles();
+        } else if (v.getId() == R.id.btnlistapersonas) {
             Intent intentLista = new Intent(getApplicationContext(),
                     ListaActivity.class);
             intentLista.putExtra("listapersonas",
                     (ArrayList<String>)personas);
             startActivity(intentLista);
         }
+    }
+
+    private void setearControles(){
+        binding.etnombre.setText("");
+        binding.etapellido.setText("");
+        binding.rggenero.clearCheck();
+        binding.cbdeporte.setChecked(false);
+        binding.cbarte.setChecked(false);
+        binding.cbotros.setChecked(false);
+        binding.spestadocivil.setSelection(0);
+        binding.swnotificacion.setChecked(false);
+        preferencias.clear();
+        binding.etnombre.setFocusableInTouchMode(true);
+        binding.etnombre.requestFocus();
     }
 }
